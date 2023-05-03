@@ -35,16 +35,18 @@ class DictionaryCubit extends Cubit<DictionaryState> {
             type: meaning['partOfSpeech'] ?? '',
             definition: meaning['definitions'][0]['definition'] ?? '',
             example: meaning['definitions'][0]['example'] ?? '',
-            audio: data["phonetics"][i]["audio"] ?? '',
-            pronunciation: data["phonetics"][i]["text"] ?? '',
+            audio: data["phonetics"].length > 0
+                ? data["phonetics"][i]["audio"] ?? ''
+                : "",
+            pronunciation: data["phonetics"].length > 0
+                ? data["phonetics"][i]["text"] ?? ''
+                : "",
             // pronunciation: data["phonetics"][0]["text"] ?? "",
 
             // imageUrl: data['thumbnail'] ?? '',
 
-            synonyms:
-                List<String>.from(meaning['definitions'][0]['synonyms'] ?? []),
-            antonyms:
-                List<String>.from(meaning['definitions'][0]['antonyms'] ?? []),
+            synonyms: List<String>.from(meaning['synonyms'] ?? []),
+            antonyms: List<String>.from(meaning['antonyms'] ?? []),
           );
           definitions.add(definition);
         }
