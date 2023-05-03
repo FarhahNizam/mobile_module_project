@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -24,13 +25,21 @@ class DictionaryCubit extends Cubit<DictionaryState> {
         final data = jsonDecode(response.body)[0];
         final List<Definition> definitions = [];
 
-        for (final meaning in data['meanings']) {
+        print(data["meanings"]);
+
+        for (int i = 0; i < data['meanings'].length; i++) {
+          final meaning = data['meanings'][i];
           final definition = Definition(
             word: data['word'],
             type: meaning['partOfSpeech'] ?? '',
             definition: meaning['definitions'][0]['definition'] ?? '',
             example: meaning['definitions'][0]['example'] ?? '',
-            imageUrl: data['thumbnail'] ?? '',
+            audio: data["phonetics"][i]["audio"] ?? '',
+            pronunciation: data["phonetics"][i]["text"] ?? '',
+            // pronunciation: data["phonetics"][0]["text"] ?? "",
+
+            // imageUrl: data['thumbnail'] ?? '',
+
             synonyms:
                 List<String>.from(meaning['definitions'][0]['synonyms'] ?? []),
             antonyms:

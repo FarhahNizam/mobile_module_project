@@ -14,6 +14,8 @@ import './cubit/auth/auth_cubit.dart';
 import './pages/favorite_page.dart';
 import './pages/login_page.dart';
 import 'firebase_options.dart';
+// changes 1
+// import 'splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
